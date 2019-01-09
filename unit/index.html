@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script src="js/lib/vue.min.js"></script>
+    <script src="js/lib/vue-resource.js"></script>
+	</head>
+	<body>
+		<div id="app">		
+			{{test}}
+			<ul>
+				<li v-for="item in list">
+					{{item.dutyId}}
+					{{item.dutyName}}
+					{{item.schoolId}}
+					
+				</li>
+				
+			</ul>
+		</div>
+		
+		<script>
+			
+		new Vue({
+		
+			el:'#app',
+			data:{
+				test:'ssss',
+				list:[]
+			},
+			mounted:function(){
+				this.$nextTick(function () {
+		        	this.addressView();
+		     	 })
+	        },
+	        methods:{
+	        	addressView:function(){
+	        		var _this=this;
+				this.$http.get("http://127.0.0.1:8080/ssm/SchDepartment/insertDepartment",{student_name:"nihao"}).then(function(res){
+					console.log(res);
+					_this.list=res.data;
+			     })
+		      }
+	        }
+		
+		})
+			
+		</script>
+		
+		
+	</body>
+	
+
+</html>
